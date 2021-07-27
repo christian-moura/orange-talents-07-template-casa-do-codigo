@@ -1,5 +1,6 @@
 package br.com.zup.casadocodigo.autor;
 
+import br.com.zup.casadocodigo.validator.EmailUnico;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
 
@@ -15,6 +16,7 @@ public class AutorRequest {
     @JsonProperty
     @NotNull
     @Email
+    @EmailUnico
     private String email;
     @JsonProperty
     @NotNull
