@@ -5,21 +5,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class AutorRequest {
 
     @JsonProperty
-    @NotNull
+    @NotBlank
     private String nome;
     @JsonProperty
-    @NotNull
+    @NotBlank
     @Email
     @EmailUnico
     private String email;
     @JsonProperty
-    @NotNull
+    @NotBlank
     @Length(max = 400)
     private String descricao;
 

@@ -1,5 +1,4 @@
-package br.com.zup.casadocodigo.autor;
-
+package br.com.zup.casadocodigo.categoria;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,25 +11,48 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.transaction.annotation.Transactional;
 
-
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.net.URI;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class AutorControllerTest {
+public class CategoriaControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
+    @PersistenceContext
+    private EntityManager manager;
+
     @Test
     public void deveriaDevolver400CasoDadosInseridosSejamInvalidos() throws Exception {
-        URI uri = new URI("/autor");
-        String payload = "{\"nome\":\"\",\"email\":\"christian5\",\"descricao\":\"\"}";
-                mockMvc.perform(
+        URI uri = new URI("/categoria");
+        String payload = "{\"nome\":\"\"}";
+        mockMvc.perform(
+                MockMvcRequestBuilders
+                        .post(uri)
+                        .content(payload)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().is(400));
+    }
+
+    @Test
+    @Transactional
+    public void deveriaDevolver400ComNomeCategoriaJaCadastrado() throws Exception {
+
+        Categoria categoria = new Categoria("Programação");
+        manager.persist(categoria);
+        URI uri = new URI("/categoria");
+        String payload = "{\"nome\":\"Programação\"}";
+        mockMvc.perform(
                 MockMvcRequestBuilders
                         .post(uri)
                         .content(payload)
@@ -41,8 +63,8 @@ public class AutorControllerTest {
     @Test
     public void deveriaCadastrarEDevolver200ComDadosValidos() throws Exception {
 
-        URI uri = new URI("/autor");
-        String payload = "{\"nome\":\"Christian Rodrigues\",\"email\":\"christian@email.com\",\"descricao\":\"Ele é zupper\"}";
+        URI uri = new URI("/categoria");
+        String payload = "{\"nome\":\"Programação\"}";
         mockMvc.perform(
                 MockMvcRequestBuilders
                         .post(uri)
@@ -50,4 +72,5 @@ public class AutorControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().is(200));
     }
+
 }

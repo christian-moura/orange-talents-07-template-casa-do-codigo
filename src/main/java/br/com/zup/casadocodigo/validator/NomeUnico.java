@@ -4,12 +4,13 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
+
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Constraint(validatedBy = EmailUnicoValidator.class)
-public @interface EmailUnico {
-    String message() default "Email indisponível. Por favor, informe outro.";
+@Constraint(validatedBy = NomeUnicoValidator.class)
+public @interface NomeUnico {
+    String message() default "Nome de categoria indisponível. Informe outro, por favor.";
     Class<?> [] groups() default {};
     Class<? extends Payload> [] payload() default {};
 }

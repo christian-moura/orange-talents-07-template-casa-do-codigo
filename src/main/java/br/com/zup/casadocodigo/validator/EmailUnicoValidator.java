@@ -9,8 +9,7 @@ import javax.validation.ConstraintValidatorContext;
 
 public class EmailUnicoValidator implements ConstraintValidator<EmailUnico, String> {
 
-
-    private final EntityManager manager;
+    private  EntityManager manager;
 
     @Autowired
     public EmailUnicoValidator(EntityManager manager) {
