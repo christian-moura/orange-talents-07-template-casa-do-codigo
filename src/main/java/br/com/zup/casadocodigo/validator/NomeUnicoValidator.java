@@ -1,7 +1,6 @@
 package br.com.zup.casadocodigo.validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;

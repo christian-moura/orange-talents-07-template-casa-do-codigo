@@ -6,7 +6,6 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class AutorRequest {
@@ -18,6 +17,7 @@ public class AutorRequest {
     @NotBlank
     @Email
     @EmailUnico
+
     private String email;
     @JsonProperty
     @NotBlank

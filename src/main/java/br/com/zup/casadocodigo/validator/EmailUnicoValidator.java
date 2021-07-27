@@ -16,8 +16,8 @@ public class EmailUnicoValidator implements ConstraintValidator<EmailUnico, Stri
         this.manager = manager;
     }
 
-
     public boolean isValid(String email, ConstraintValidatorContext context) {
+
         Query query = manager.createQuery("select a from Autor a where a.email = :email");
         query.setParameter("email", email);
         return query.getResultList().isEmpty();

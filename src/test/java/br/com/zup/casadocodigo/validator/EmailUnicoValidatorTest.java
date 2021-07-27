@@ -30,7 +30,6 @@ public class EmailUnicoValidatorTest {
     }
 
     @Test
-    @Transactional
     public void OEmailEUnicoEOTesteDevePassar(){
         boolean valid = validator.isValid("christian@email.com", context);
         Assertions.assertTrue(valid);

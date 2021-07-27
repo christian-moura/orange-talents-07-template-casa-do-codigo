@@ -30,7 +30,6 @@ class NomeUnicoValidatorTest {
     }
 
     @Test
-    @Transactional
     public void ONomeEUnicoEOTesteDevePassar(){
         boolean valid = validator.isValid("Programação", context);
         Assertions.assertTrue(valid);

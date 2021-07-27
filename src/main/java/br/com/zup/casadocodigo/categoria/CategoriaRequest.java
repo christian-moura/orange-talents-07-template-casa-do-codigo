@@ -1,16 +1,16 @@
 package br.com.zup.casadocodigo.categoria;
 
-import br.com.zup.casadocodigo.validator.NomeUnico;
+import br.com.zup.casadocodigo.validator.ValorUnico;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 public class CategoriaRequest {
 
         @JsonProperty
         @NotBlank
-        @NomeUnico
+        //@NomeUnico
+        @ValorUnico(entidade = "Categoria", atributo = "nome")
         private String nome;
 
         public Categoria toCategoria(){
