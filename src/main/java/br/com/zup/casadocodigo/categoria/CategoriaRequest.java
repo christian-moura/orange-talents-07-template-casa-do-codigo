@@ -9,8 +9,7 @@ public class CategoriaRequest {
 
         @JsonProperty
         @NotBlank
-        //@NomeUnico
-        @ValorUnico(entidade = "Categoria", atributo = "nome")
+        @ValorUnico(entidade = Categoria.class, atributo = "nome")
         private String nome;
 
         public Categoria toCategoria(){

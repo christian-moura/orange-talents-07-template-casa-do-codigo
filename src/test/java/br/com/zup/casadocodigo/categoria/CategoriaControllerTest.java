@@ -17,8 +17,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.net.URI;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

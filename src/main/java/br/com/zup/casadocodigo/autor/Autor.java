@@ -1,10 +1,10 @@
 package br.com.zup.casadocodigo.autor;
 
-import br.com.zup.casadocodigo.validator.EmailUnico;
-
+import br.com.zup.casadocodigo.livro.Livro;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Autor {
@@ -22,6 +22,9 @@ public class Autor {
 
     @Column(nullable = false)
     private LocalDateTime dataCadastro ;
+
+    @OneToMany(mappedBy = "autor")
+    private List<Livro> livros;
 
     public Autor() {
     }

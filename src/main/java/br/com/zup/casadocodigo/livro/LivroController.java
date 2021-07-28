@@ -1,4 +1,5 @@
-package br.com.zup.casadocodigo.categoria;
+package br.com.zup.casadocodigo.livro;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,20 +13,20 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/categoria")
-public class CategoriaController {
+@RequestMapping(value = "/livro")
+public class LivroController {
 
-    private final EntityManager entityManager;
+    private  EntityManager entityManager;
 
     @Autowired
-    public  CategoriaController (EntityManager entityManager){
+    public  LivroController (EntityManager entityManager){
         this.entityManager = entityManager;
     }
 
     @Transactional
     @PostMapping
-    public ResponseEntity<?> cadastro(@RequestBody @Valid CategoriaRequest categoriaRequest){
-        entityManager.persist(categoriaRequest.toCategoria());
+    public ResponseEntity<?> cadastro(@RequestBody @Valid LivroRequest livroRequest){
+        entityManager.persist(livroRequest.toLivro(entityManager));
         return ResponseEntity.ok().build();
     }
 

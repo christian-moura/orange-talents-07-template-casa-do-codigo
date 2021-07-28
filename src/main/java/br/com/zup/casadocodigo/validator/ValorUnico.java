@@ -10,9 +10,9 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = ValorUnicoValidator.class)
 public @interface ValorUnico {
 
-    String message() default "Email indisponível. Por favor, informe outro.";
+    String message() default "Atributo indisponível para cadastro. Informe outro";
     Class<?> [] groups() default {};
     Class<? extends Payload> [] payload() default {};
-    String entidade() ;
+    Class<?> entidade();
     String atributo() ;
 }

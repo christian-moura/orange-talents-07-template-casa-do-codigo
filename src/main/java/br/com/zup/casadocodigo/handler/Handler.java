@@ -1,10 +1,12 @@
 package br.com.zup.casadocodigo.handler;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,4 +19,9 @@ public class Handler {
         return ResponseEntity.badRequest().body(erros);
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<?> IllegalStateException(IllegalStateException e){
+        Error error = new Error(e.getMessage(),"id" );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
 }

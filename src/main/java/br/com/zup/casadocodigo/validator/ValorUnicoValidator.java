@@ -11,7 +11,7 @@ public class ValorUnicoValidator  implements ConstraintValidator<ValorUnico, Str
 
 
     private EntityManager manager;
-    private String entidade = null;
+    Class<?> entidade;
     private String atributo = null;
 
 
@@ -19,7 +19,6 @@ public class ValorUnicoValidator  implements ConstraintValidator<ValorUnico, Str
     public ValorUnicoValidator(EntityManager manager) {
         this.manager = manager;
     }
-
 
     @Override
     public void initialize(ValorUnico constraintAnnotation) {
@@ -29,7 +28,7 @@ public class ValorUnicoValidator  implements ConstraintValidator<ValorUnico, Str
 
     @Override
     public boolean isValid(String valor, ConstraintValidatorContext context) {
-        Query query = manager.createQuery("select e from "+entidade+ " e where e."+atributo+" = :valor");
+        Query query = manager.createQuery("select e from "+entidade.getName()+ " e where e."+atributo+" = :valor");
         query.setParameter("valor", valor);
         return query.getResultList().isEmpty();
     }
