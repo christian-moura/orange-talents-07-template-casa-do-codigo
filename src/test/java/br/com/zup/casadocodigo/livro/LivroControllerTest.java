@@ -19,6 +19,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -35,6 +36,7 @@ public class LivroControllerTest {
     @PersistenceContext
     private EntityManager manager;
 
+     //  -------------------  testes para método de cadastro  ----------------
     @Test
     @Transactional
     public void deveriaCadastrarEDevolver200ComDadosValidos() throws Exception {
@@ -84,5 +86,16 @@ public class LivroControllerTest {
                         .content(payload)
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().is(400));
+    }
+
+    //  -------------------  testes para método de listar todos produtos  ----------------
+
+    @Test
+    public void deveriaretornar200ComTodosLivrosCadastrados() throws Exception {;
+        URI uri = new URI("/livro");
+        mockMvc.perform(
+                MockMvcRequestBuilders
+                        .get(uri)
+        ).andExpect(MockMvcResultMatchers.status().is(200));
     }
 }
