@@ -19,7 +19,6 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -88,14 +87,43 @@ public class LivroControllerTest {
         ).andExpect(MockMvcResultMatchers.status().is(400));
     }
 
-    //  -------------------  testes para método de listar todos produtos  ----------------
+    //  -------------------  testes para método de listar todos livros  ----------------
 
     @Test
-    public void deveriaretornar200ComTodosLivrosCadastrados() throws Exception {;
+    public void deveriaretornar200ComTodosLivrosCadastrados() throws Exception {
         URI uri = new URI("/livro");
         mockMvc.perform(
                 MockMvcRequestBuilders
                         .get(uri)
         ).andExpect(MockMvcResultMatchers.status().is(200));
+    }
+
+    //  -------------------  testes para método de detalhes livro por ID  ----------------
+
+    @Test
+    @Transactional
+    public void deveriaretornar200ComosDetalhesDoLivroDoID() throws Exception {
+        Autor autor = new Autor("Christian Rodrigues","christian@email.com","Autor de romance", LocalDateTime.now());
+        Categoria categoria = new Categoria("Romance");
+        Livro livro = new Livro("Amor incondicional","sumario","resumo", BigDecimal.valueOf(5000.0),
+                101,"978–65–012–5227–77",
+                LocalDate.of(2022, 1, 8),autor,categoria);
+        manager.persist(autor);
+        manager.persist(categoria);
+        manager.persist(livro);
+
+        URI uri = new URI("/livro/1");
+        mockMvc.perform(
+                MockMvcRequestBuilders
+                        .get(uri)
+        ).andExpect(MockMvcResultMatchers.status().is(200));
+    }
+    @Test
+    public void deveriaretornar404ComIDDeLivroInexistente() throws Exception {
+        URI uri = new URI("/livro/1");
+        mockMvc.perform(
+                MockMvcRequestBuilders
+                        .get(uri)
+        ).andExpect(MockMvcResultMatchers.status().is(404));
     }
 }

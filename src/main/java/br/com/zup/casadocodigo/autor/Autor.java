@@ -35,4 +35,12 @@ public class Autor {
         this.descricao = descricao;
         this.dataCadastro = dataCadastro;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
 }

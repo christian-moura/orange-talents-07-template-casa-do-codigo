@@ -30,9 +30,16 @@ public class LivroController {
     }
 
     @GetMapping
-    public ResponseEntity<List<LivrosResponse>> listarLivros (){
+    public ResponseEntity<List<LivroResponse>> listarLivros (){
         List <Livro> lista = entityManager.createQuery("select t from Livro t").getResultList();
-        return ResponseEntity.ok(lista.stream().map(LivrosResponse::new).collect(Collectors.toList()));
+        return ResponseEntity.ok(lista.stream().map(LivroResponse::new).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<LivroDetalhadoResponse> detalhesLivro (@PathVariable Long id){
+       Livro livro = entityManager.find(Livro.class,id);
+       if(livro == null) return ResponseEntity.notFound().build();
+       return ResponseEntity.ok(new LivroDetalhadoResponse(livro));
     }
 
 }
