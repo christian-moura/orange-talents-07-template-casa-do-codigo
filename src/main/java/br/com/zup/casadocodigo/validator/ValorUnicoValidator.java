@@ -9,11 +9,9 @@ import javax.validation.ConstraintValidatorContext;
 
 public class ValorUnicoValidator  implements ConstraintValidator<ValorUnico, String> {
 
-
     private EntityManager manager;
     Class<?> entidade;
     private String atributo = null;
-
 
     @Autowired
     public ValorUnicoValidator(EntityManager manager) {
@@ -32,6 +30,4 @@ public class ValorUnicoValidator  implements ConstraintValidator<ValorUnico, Str
         query.setParameter("valor", valor);
         return query.getResultList().isEmpty();
     }
-
-
 }

@@ -9,7 +9,6 @@ import javax.validation.ConstraintValidatorContext;
 
 public class NomeUnicoValidator implements ConstraintValidator<NomeUnico, String> {
 
-
     private EntityManager manager;
 
     @Autowired

@@ -1,7 +1,10 @@
 package br.com.zup.casadocodigo.livro;
+import br.com.zup.casadocodigo.handler.Error;
 
-
+import br.com.zup.casadocodigo.autor.AutorRepository;
+import br.com.zup.casadocodigo.categoria.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +19,8 @@ import java.util.stream.Collectors;
 public class LivroController {
 
     private  EntityManager entityManager;
+    private AutorRepository autorRepository;
+    private CategoriaRepository categoriaRepository;
 
     @Autowired
     public  LivroController (EntityManager entityManager){
@@ -36,9 +41,9 @@ public class LivroController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LivroDetalhadoResponse> detalhesLivro (@PathVariable Long id){
+    public ResponseEntity<?> detalhesLivro (@PathVariable Long id){
        Livro livro = entityManager.find(Livro.class,id);
-       if(livro == null) return ResponseEntity.notFound().build();
+       if(livro == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Error("Livro não encontado com o id: "+id,"id"));
        return ResponseEntity.ok(new LivroDetalhadoResponse(livro));
     }
 

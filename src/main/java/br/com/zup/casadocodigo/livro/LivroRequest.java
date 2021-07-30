@@ -51,12 +51,12 @@ public class LivroRequest {
 
     public Livro toLivro(EntityManager entityManager) {
 
-        Autor autor = entityManager.find(Autor.class, idAutor);
-        Categoria categoria = entityManager.find(Categoria.class, idCategoria);
-        Assert.state(autor!=null,"ID de Autor inexistente: "+idAutor);
-        Assert.state(categoria!=null,"ID de Categoria inexistente "+idCategoria);
+       Autor autor = entityManager.find(Autor.class, idAutor);
+       Categoria categoria = entityManager.find(Categoria.class, idCategoria);
+       Assert.state(autor!=null,"ID de Autor inexistente: "+idAutor);
+       Assert.state(categoria!=null,"ID de Categoria inexistente "+idCategoria);
 
-        return new Livro(this.titulo,
+       return new Livro(this.titulo,
                 this.sumario,this.resumo,this.preco,this.numeroPaginas,
                 this.isbn, this.dataLancamento, autor,categoria);
     }
