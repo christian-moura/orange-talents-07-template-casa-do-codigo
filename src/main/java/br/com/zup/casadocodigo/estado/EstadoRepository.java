@@ -10,4 +10,5 @@ public interface EstadoRepository extends JpaRepository<Estado,Long> {
     @Query(value = "select * from estado as e where e.nome = :nome and e.pais_id = :id", nativeQuery = true)
     Optional<Estado> findEstadoByNomeAndPais(String nome, Object id);
 
+    Estado findEstadoByNome(String nome);
 }

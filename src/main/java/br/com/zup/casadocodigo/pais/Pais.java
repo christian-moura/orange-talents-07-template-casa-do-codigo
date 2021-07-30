@@ -1,5 +1,6 @@
 package br.com.zup.casadocodigo.pais;
 
+import br.com.zup.casadocodigo.cliente.Cliente;
 import br.com.zup.casadocodigo.estado.Estado;
 
 import javax.persistence.*;
@@ -16,6 +17,9 @@ public class Pais {
     private String nome;
     @OneToMany(mappedBy = "pais")
     private List<Estado> estados =new ArrayList<>();
+
+    @OneToMany(mappedBy = "pais")
+    private List<Cliente> clientes =new ArrayList<>();
 
     public Pais() {}
 
